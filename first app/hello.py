@@ -44,7 +44,7 @@ List of supported commands:
 
 
 def check_step(step):
-    if " desc" in step:
+    if "desc" in step:
         print(get_value(DICT_WITH_DESC, step.split(' ')[0]))
     elif not step in get_steps(DICT_WITH_DESC):
         print("No such step, available steps:\n {1}", get_steps(DICT_WITH_DESC))
