@@ -46,26 +46,26 @@ def update_score(score, winner):
 
 
 def make_decision(user_choice, comp_choice):
+    winner = ""
     if user_choice == comp_choice:
         print("draw")
         winner = 'draw'
 
-    elif user_choice == 1 and comp_choice == 2 or user_choice == 2 and comp_choice == 3 or user_choice == 3 and comp_choice == 1:
+    elif user_choice == 1 and comp_choice == 2 or \
+            user_choice == 2 and comp_choice == 3 or \
+            user_choice == 3 and comp_choice == 1:
         winner = 'user'
 
-
-    elif user_choice == 1 and comp_choice == 3 or user_choice == 2 and comp_choice == 1 or user_choice == 3 and comp_choice == 2:
+    elif user_choice == 1 and comp_choice == 3 or \
+            user_choice == 2 and comp_choice == 1 or \
+            user_choice == 3 and comp_choice == 2:
         winner = 'pc'
 
-
     elif user_choice == 4:
-        print exit_program()
+        print(exit_program())
         sys.exit()
 
     return winner
-
-    print winner()
-    update_score(winner_name, score)
 
 
 main()
