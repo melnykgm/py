@@ -18,12 +18,12 @@ def get_info():
 1 - scissors
 2 - rock
 3 - paper
-4 - exit"""
+exit - exit from game"""
     return info
 
 
 def get_user_choice():
-    user_choice = int(raw_input())
+    user_choice = input()
     return user_choice
 
 
@@ -47,6 +47,11 @@ def update_score(score, winner):
 
 def make_decision(user_choice, comp_choice):
     winner = ""
+    if user_choice == 'exit':
+        print(exit_program())
+        sys.exit()
+    user_choice = int(user_choice)
+
     if user_choice == comp_choice:
         print("draw")
         winner = 'draw'
@@ -60,10 +65,6 @@ def make_decision(user_choice, comp_choice):
             user_choice == 2 and comp_choice == 1 or \
             user_choice == 3 and comp_choice == 2:
         winner = 'pc'
-
-    elif user_choice == 4:
-        print(exit_program())
-        sys.exit()
 
     return winner
 
