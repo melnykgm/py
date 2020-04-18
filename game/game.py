@@ -16,7 +16,7 @@ def main():
         score = update_score(score, winner)
         if winner != 'draw':
             print("Winner: {0}".format(winner))
-        print('####Score####','\nUser: {0}\nComputer: {1}'.format(*score))
+        print('####Score####', '\nUser: {0}\nComputer: {1}'.format(*score))
         exit_program()
 
 
