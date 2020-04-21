@@ -18,6 +18,7 @@ def main():
             print("Winner: {0}".format(winner))
         print('####Score####', '\nUser: {0}\nComputer: {1}'.format(*score))
         exit_program()
+        print('\n')
 
 
 def print_made_choices(user_choice, comp_choice, choices):
