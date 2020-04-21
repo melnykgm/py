@@ -4,13 +4,25 @@ import sys
 
 def main():
     score = [0, 0]
+    choices = {'1': 'scissors',
+               '2': 'rock',
+               '3': 'paper'}
     while True:
         print(get_info())
-        winner = make_decision(get_user_choice(), get_comp_choice(1, 3))
+        user_choice = get_user_choice()
+        comp_choice = get_comp_choice(1, 3)
+        print_made_choices(user_choice, str(comp_choice), choices)
+        winner = make_decision(user_choice, comp_choice)
         score = update_score(score, winner)
-        print(winner)
-        print(score)
+        if winner != 'draw':
+            print("Winner: {0}".format(winner))
+        print('####Score####', '\nUser: {0}\nComputer: {1}'.format(*score))
         exit_program()
+        print('\n')
+
+
+def print_made_choices(user_choice, comp_choice, choices):
+    print("Your choice was: \"{0}\", computer choice was: \"{1}\"".format(choices[user_choice], choices[comp_choice]))
 
 
 def get_info():
@@ -39,9 +51,9 @@ def exit_program():
 
 def update_score(score, winner):
     if winner == 'user':
-        score[0] = + 1
-    elif winner == 'pc':
-        score[1] = + 1
+        score[0] += 1
+    elif winner == 'computer':
+        score[1] += 1
     return score
 
 
@@ -53,7 +65,7 @@ def make_decision(user_choice, comp_choice):
     user_choice = int(user_choice)
 
     if user_choice == comp_choice:
-        print("draw")
+        print("There is no winner: it's a draw")
         winner = 'draw'
 
     elif user_choice == 1 and comp_choice == 2 or \
@@ -64,7 +76,7 @@ def make_decision(user_choice, comp_choice):
     elif user_choice == 1 and comp_choice == 3 or \
             user_choice == 2 and comp_choice == 1 or \
             user_choice == 3 and comp_choice == 2:
-        winner = 'pc'
+        winner = 'computer'
 
     return winner
 
