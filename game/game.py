@@ -24,7 +24,7 @@ def main():
 
 def print_made_choices(user_choice, comp_choice, choices):
     """Printing user's and computer's choices."""
-    print("Your choice was: \"{0}\", computer choice was: \"{1}\"".format(choices[user_choice], choices[comp_choice]))
+    return choices[user_choice], choices[comp_choice]
 
 
 def get_info():
