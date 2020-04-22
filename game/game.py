@@ -4,14 +4,27 @@ import sys
 
 def main():
     """Runs the whole program."""
+    score = [0, 0]
+    choices = {'1': 'scissors',
+               '2': 'rock',
+               '3': 'paper'}
     while True:
         print(get_info())
-        print_report()
+        user_choice = get_user_choice()
+        comp_choice = get_comp_choice(1, 3)
+        print_made_choices(user_choice, str(comp_choice), choices)
+        winner = make_decision(user_choice, comp_choice)
+        score = update_score(score, winner)
+        if winner != 'draw':
+            print("Winner: {0}".format(winner))
+        print('####Score####', '\nUser: {0}\nComputer: {1}'.format(*score))
+        exit_program()
+        print('\n')
 
 
-def get_made_choices(user_choice, comp_choice, choices):
+def print_made_choices(user_choice, comp_choice, choices):
     """Printing user's and computer's choices."""
-    return "Your choice was: \"{0}\", computer choice was: \"{1}\"".format(choices[user_choice], choices[comp_choice])
+    print("Your choice was: \"{0}\", computer choice was: \"{1}\"".format(choices[user_choice], choices[comp_choice]))
 
 
 def get_info():
@@ -38,7 +51,8 @@ def get_comp_choice(x, y):
 
 def exit_program():
     """Writes text we assign in variable bye."""
-    return "Thanks for the game, bye"
+    bye = "Thanks for the game, bye"
+    return bye
 
 
 def update_score(score, winner):
@@ -50,17 +64,17 @@ def update_score(score, winner):
     return score
 
 
-def get_decision(user_choice, comp_choice):
+def make_decision(user_choice, comp_choice):
     """Returns the result of user's decision compared with computer's decision, exits the program if user prints
     exit."""
     winner = ""
-
     if user_choice == 'exit':
-        return exit_program()
-
+        print(exit_program())
+        sys.exit()
     user_choice = int(user_choice)
 
     if user_choice == comp_choice:
+        print("There is no winner: it's a draw")
         winner = 'draw'
 
     elif user_choice == 1 and comp_choice == 2 or \
@@ -76,28 +90,4 @@ def get_decision(user_choice, comp_choice):
     return winner
 
 
-def print_report():
-    score = [0, 0]
-    choices = {'1': 'scissors',
-               '2': 'rock',
-               '3': 'paper'}
-    user_choice = get_user_choice()
-    comp_choice = get_comp_choice(1, 3)
-    winner = get_decision(user_choice, comp_choice)
-    if winner == 'exit':
-        print(exit_program())
-        quit()
-    if winner != 'draw':
-        print("Winner: {0}".format(winner))
-    if winner == 'draw':
-        print("There is no winner: it's a Draw")
-    score = update_score(score, winner)
-    print(get_made_choices(user_choice, str(comp_choice), choices))
-    print('####Score####', '\nUser: {0}\nComputer: {1}'.format(*score))
-    print('\n')
-
-
 main()
-
-# не працює правильно вихід і не плюсується рахунок score
-
