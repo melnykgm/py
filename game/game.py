@@ -3,6 +3,7 @@ import sys
 
 
 def main():
+    """Runs the whole program."""
     score = [0, 0]
     choices = {'1': 'scissors',
                '2': 'rock',
@@ -22,10 +23,12 @@ def main():
 
 
 def print_made_choices(user_choice, comp_choice, choices):
+    """Printing user's and computer's choices."""
     print("Your choice was: \"{0}\", computer choice was: \"{1}\"".format(choices[user_choice], choices[comp_choice]))
 
 
 def get_info():
+    """Provides user with info what one should print to play this game."""
     info = """Make your choice:
 1 - scissors
 2 - rock
@@ -35,21 +38,25 @@ exit - exit from game"""
 
 
 def get_user_choice():
+    """Receives input from user and assigns it to variable user_choice, returns it."""
     user_choice = input()
     return user_choice
 
 
 def get_comp_choice(x, y):
+    """Gets a random value in range from x to y and assigns it to variable comp_choice, returns it."""
     comp_choice = random.randint(x, y)
     return comp_choice
 
 
 def exit_program():
+    """Writes text we assign in variable bye."""
     bye = "Thanks for the game, bye"
     return bye
 
 
 def update_score(score, winner):
+    """Returns score with arguments score and winner."""
     if winner == 'user':
         score[0] += 1
     elif winner == 'computer':
@@ -58,6 +65,8 @@ def update_score(score, winner):
 
 
 def make_decision(user_choice, comp_choice):
+    """Returns the result of user's decision compared with computer's decision, exits the program if user prints
+    exit."""
     winner = ""
     if user_choice == 'exit':
         print(exit_program())
