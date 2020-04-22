@@ -12,7 +12,7 @@ def main():
         print(get_info())
         user_choice = get_user_choice()
         comp_choice = get_comp_choice(1, 3)
-        print_made_choices(user_choice, str(comp_choice), choices)
+        get_made_choices(user_choice, str(comp_choice), choices)
         winner = make_decision(user_choice, comp_choice)
         score = update_score(score, winner)
         if winner != 'draw':
@@ -22,8 +22,8 @@ def main():
         print('\n')
 
 
-def print_made_choices(user_choice, comp_choice, choices):
-    """Printing user's and computer's choices."""
+def get_made_choices(user_choice, comp_choice, choices):
+    """Returning user's and computer's choices."""
     return choices[user_choice], choices[comp_choice]
 
 
