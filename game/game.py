@@ -13,7 +13,7 @@ def main():
         user_choice = get_user_choice()
         comp_choice = get_comp_choice(1, 3)
         get_made_choices(user_choice, str(comp_choice), choices)
-        winner = make_decision(user_choice, comp_choice)
+        winner = get_winner(user_choice, comp_choice)
         score = update_score(score, winner)
         if winner != 'draw':
             print("Winner: {0}".format(winner))
@@ -64,7 +64,7 @@ def update_score(score, winner):
     return score
 
 
-def make_decision(user_choice, comp_choice):
+def get_winner(user_choice, comp_choice):
     """Returns the result of user's decision compared with computer's decision, exits the program if user prints
     exit."""
     winner = ""
