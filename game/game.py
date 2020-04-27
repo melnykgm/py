@@ -1,5 +1,6 @@
 import random
 import sys
+from typing import List
 
 
 def main():
@@ -8,23 +9,24 @@ def main():
     choices = {'1': 'scissors',
                '2': 'rock',
                '3': 'paper'}
+    print(get_info())
     while True:
-        print(get_info())
         user_choice = get_user_choice()
         comp_choice = get_comp_choice(1, 3)
-        print_made_choices(user_choice, str(comp_choice), choices)
-        winner = make_decision(user_choice, comp_choice)
+        check_for_exit_program(user_choice)
+        if check_for_help(user_choice):
+            continue
+        winner = get_winner(user_choice, comp_choice)
         score = update_score(score, winner)
-        if winner != 'draw':
-            print("Winner: {0}".format(winner))
-        print('####Score####', '\nUser: {0}\nComputer: {1}'.format(*score))
-        exit_program()
-        print('\n')
+        user_choice, comp_choice = get_made_choices(user_choice,
+                                                    str(comp_choice),
+                                                    choices)
+        print_report(winner, score, user_choice, comp_choice)
 
 
-def print_made_choices(user_choice, comp_choice, choices):
-    """Printing user's and computer's choices."""
-    print("Your choice was: \"{0}\", computer choice was: \"{1}\"".format(choices[user_choice], choices[comp_choice]))
+def get_made_choices(user_choice, comp_choice, choices):
+    """Returning user's and computer's choices."""
+    return choices[user_choice], choices[comp_choice]
 
 
 def get_info():
@@ -33,13 +35,15 @@ def get_info():
 1 - scissors
 2 - rock
 3 - paper
-exit - exit from game"""
+help - prints help info
+exit - exit from game
+"""
     return info
 
 
 def get_user_choice():
     """Receives input from user and assigns it to variable user_choice, returns it."""
-    user_choice = input()
+    user_choice = input("Type in your choice: ")
     return user_choice
 
 
@@ -49,10 +53,19 @@ def get_comp_choice(x, y):
     return comp_choice
 
 
-def exit_program():
-    """Writes text we assign in variable bye."""
-    bye = "Thanks for the game, bye"
-    return bye
+def check_for_exit_program(user_choice: str) -> None:
+    """Check for exit and exits program."""
+    if user_choice == 'exit':
+        sys.exit()
+
+
+def check_for_help(user_choice: str) -> bool:
+    """Check for help and prints info."""
+    if user_choice == 'help':
+        print(get_info())
+        return True
+    else:
+        return False
 
 
 def update_score(score, winner):
@@ -64,17 +77,12 @@ def update_score(score, winner):
     return score
 
 
-def make_decision(user_choice, comp_choice):
-    """Returns the result of user's decision compared with computer's decision, exits the program if user prints
-    exit."""
+def get_winner(user_choice, comp_choice):
+    """Makes decision about winner and returns it."""
     winner = ""
-    if user_choice == 'exit':
-        print(exit_program())
-        sys.exit()
     user_choice = int(user_choice)
 
     if user_choice == comp_choice:
-        print("There is no winner: it's a draw")
         winner = 'draw'
 
     elif user_choice == 1 and comp_choice == 2 or \
@@ -88,6 +96,21 @@ def make_decision(user_choice, comp_choice):
         winner = 'computer'
 
     return winner
+
+
+def print_report(winner: str, score: List, user_choice: str, comp_choice: str) -> None:
+    """Prints winner, score, choices made by user and computer, and message if draw."""
+    if winner != 'draw':
+        print("""Your choice was: {0}
+Computer choice was: {1}
+Winner: {2}
+####Score#### 
+User: {3}
+Computer: {4}
+""".format(user_choice, comp_choice, winner, *score))
+    else:
+        print("""Your choice was: {0}
+There is no winner: it's a Draw!""".format(user_choice))
 
 
 main()
