@@ -1,9 +1,10 @@
 import random
 import sys
 from typing import List
+from typing import Any
 
 
-def main():
+def main() -> None:
     """Runs the whole program."""
     score = [0, 0]
     choices = {'1': 'scissors',
@@ -24,12 +25,12 @@ def main():
         print_report(winner, score, user_choice, comp_choice)
 
 
-def get_made_choices(user_choice, comp_choice, choices):
+def get_made_choices(user_choice: str, comp_choice: str, choices: dict) -> Any:
     """Returning user's and computer's choices."""
     return choices[user_choice], choices[comp_choice]
 
 
-def get_info():
+def get_info() -> str:
     """Provides user with info what one should print to play this game."""
     info = """Make your choice:
 1 - scissors
@@ -41,13 +42,13 @@ exit - exit from game
     return info
 
 
-def get_user_choice():
+def get_user_choice() -> str:
     """Receives input from user and assigns it to variable user_choice, returns it."""
     user_choice = input("Type in your choice: ")
     return user_choice
 
 
-def get_comp_choice(x, y):
+def get_comp_choice(x: int, y: int) -> int:
     """Gets a random value in range from x to y and assigns it to variable comp_choice, returns it."""
     comp_choice = random.randint(x, y)
     return comp_choice
@@ -68,7 +69,7 @@ def check_for_help(user_choice: str) -> bool:
         return False
 
 
-def update_score(score, winner):
+def update_score(score: List, winner: str) -> List:
     """Returns score with arguments score and winner."""
     if winner == 'user':
         score[0] += 1
@@ -77,7 +78,7 @@ def update_score(score, winner):
     return score
 
 
-def get_winner(user_choice, comp_choice):
+def get_winner(user_choice: str, comp_choice: int) -> str:
     """Makes decision about winner and returns it."""
     winner = ""
     user_choice = int(user_choice)
